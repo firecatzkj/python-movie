@@ -5,7 +5,7 @@ from app.admin.forms import LoginForm,TagForm,MovieForm,PreviewForm
 from app.models import Admin,Tag,Movie,Preview
 
 from functools import wraps
-from app import db,app
+from ..conf import db,app
 from werkzeug.utils import secure_filename
 import os,datetime,uuid
 

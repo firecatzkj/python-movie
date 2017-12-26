@@ -5,8 +5,6 @@ sys.path.append("..")
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import pymysql, os
-from app.home import  home as home_blueprint
-from app.admin import admin as admin_blueprint
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123@127.0.0.1/movie"
@@ -14,12 +12,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATION"] = True
 app.config["SECRET_KEY"] = "ZHANGSan"
 app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/upload/')
 app.debug = True
-
-app.register_blueprint(home_blueprint)
-app.register_blueprint(admin_blueprint, url_prefix="/admin")
 db = SQLAlchemy(app)
-
-
 
 
 # 会员
@@ -32,11 +25,11 @@ class User(db.Model):
     phone =  db.Column(db.String(11), unique=True)
     info = db.Column(db.Text)
     face = db.Column(db.String(255), unique=True)
-    addtime = db.Column(db.DateTime, index=True,default=datetime.now)
-    uuid = db.Column(db.String(255), unique=True)#唯一标识符
-    userlogs = db.relationship('Userlog', backref='user')#会员日志外键关联
-    comments = db.relationship('Comment', backref='user')#外键关联
-    moviecols = db.relationship('Moviecol', backref='user')#外键关联
+    addtime = db.Column(db.DateTime, index=True, default=datetime.now)
+    uuid = db.Column(db.String(255), unique=True)  # 唯一标识符
+    userlogs = db.relationship('Userlog', backref='user')  # 会员日志外键关联
+    comments = db.relationship('Comment', backref='user')  # 外键关联
+    moviecols = db.relationship('Moviecol', backref='user')  # 外键关联
 
     def __repr__(self):
         return "<User %r>" % self.name
@@ -194,22 +187,20 @@ class Oplog(db.Model):
         return "<Oplog %r>" % self.id
 
 
-# if __name__=="__main__":
-#     # db.create_all()
-#     # role = Role(
-#     #     name="超级管理员",
-#     #     auths=""
-#     # )
-#     # db.session.add(role)
-#     #
-#     # db.session.commit()
-#     from werkzeug.security import generate_password_hash
-#     admin = Admin(
-#         name = "jiuyue1",
-#         pwd = generate_password_hash("jiuyue1"),
-#         is_super =  0,
-#         role_id = 1
-#     )
-#
-#     db.session.add(admin)
-#     db.session.commit()
+if __name__ == "__main__":
+    db.create_all()
+    role = Role(
+        name="超级管理员",
+        auths="123"
+    )
+    db.session.add(role)
+    db.session.commit()
+    from werkzeug.security import generate_password_hash
+    admin = Admin(
+        name="admin",
+        pwd=generate_password_hash("admin"),
+        is_super=0,
+        role_id=1
+    )
+    db.session.add(admin)
+    db.session.commit()
