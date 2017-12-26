@@ -9,11 +9,12 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123456@127.0.0.1/movie"
 app.config["SQLALCHEMY_TRACK_MODIFICATION"] = True
 app.config["SECRET_KEY"] = "ZHANGSan"
-app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)),'static/upload/')
+app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/upload/')
 app.debug = True
 db = SQLAlchemy(app)
 app.register_blueprint(home_blueprint)
 app.register_blueprint(admin_blueprint,url_prefix="/admin")
+
 
 @app.errorhandler(404)
 def page_not_found(error):

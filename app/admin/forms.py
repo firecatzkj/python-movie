@@ -1,9 +1,9 @@
 # coding:utf8
 #from flask_wtf import FlaskForm
 from flask_wtf.form import Form
-from wtforms import  StringField,PasswordField,SubmitField,FileField,TextAreaField,SelectField
-from wtforms.validators import  DataRequired,ValidationError
-from app.models import Admin,Tag
+from wtforms import  StringField, PasswordField,SubmitField,FileField,TextAreaField,SelectField
+from wtforms.validators import DataRequired,ValidationError
+from app.models import Admin, Tag
 tags = Tag.query.all()
 
 class LoginForm(Form):
@@ -164,7 +164,7 @@ class MovieForm(Form):
         render_kw={
             "class": "from-control",
             "placeholder": "请选择上映时间!",
-            "id":"input_release_time"
+            "id": "input_release_time"
         }
     )
 
@@ -175,6 +175,7 @@ class MovieForm(Form):
 
         }
     )
+
 
 class PreviewForm(Form):
     title = StringField(
