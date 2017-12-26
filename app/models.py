@@ -1,26 +1,12 @@
 # coding:utf8
 from datetime import datetime
-#from app import db
-
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-import pymysql, os
-from app.home import  home as home_blueprint
-from app.admin import admin as admin_blueprint
-
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123@127.0.0.1/movie"
-app.config["SQLALCHEMY_TRACK_MODIFICATION"] = True
-app.config["SECRET_KEY"] = "ZHANGSan"
-app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/upload/')
-app.debug = True
-db = SQLAlchemy(app)
-app.register_blueprint(home_blueprint)
-app.register_blueprint(admin_blueprint,url_prefix="/admin")
+import sys
+sys.path.append("..")
+from app import db
 
 
 
-#会员
+# 会员
 class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -66,7 +52,7 @@ class Tag(db.Model):
 #  电影
 class Movie(db.Model):
     __tablename__="movie"
-    id  = db.Column(db.Integer,primary_key=True)#编号
+    id = db.Column(db.Integer,primary_key=True)#编号
     title = db.Column(db.String(255), unique=True)
     url = db.Column(db.String(255), unique=True)
     info = db.Column(db.Text)

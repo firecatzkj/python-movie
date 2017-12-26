@@ -11,9 +11,10 @@ app.config["SQLALCHEMY_TRACK_MODIFICATION"] = True
 app.config["SECRET_KEY"] = "ZHANGSan"
 app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/upload/')
 app.debug = True
-db = SQLAlchemy(app)
+
 app.register_blueprint(home_blueprint)
-app.register_blueprint(admin_blueprint,url_prefix="/admin")
+app.register_blueprint(admin_blueprint, url_prefix="/admin")
+db = SQLAlchemy(app)
 
 
 @app.errorhandler(404)
