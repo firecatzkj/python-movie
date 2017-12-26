@@ -50,7 +50,8 @@ class Userlog(db.Model):
     def __repr__(self):
         return "<Userlog %r>" % self.id
 
-#标签
+
+# 标签
 class Tag(db.Model):
     __tablename__ = "tag"
     id = db.Column(db.Integer,primary_key=True)
