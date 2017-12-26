@@ -1,11 +1,12 @@
 # coding:utf8
-from  flask_wtf import FlaskForm
-from  wtforms import  StringField,PasswordField,SubmitField,FileField,TextAreaField,SelectField
-from  wtforms.validators import  DataRequired,ValidationError
-from  app.models import Admin,Tag
+#from flask_wtf import FlaskForm
+from flask_wtf.form import Form
+from wtforms import  StringField,PasswordField,SubmitField,FileField,TextAreaField,SelectField
+from wtforms.validators import  DataRequired,ValidationError
+from app.models import Admin,Tag
 tags = Tag.query.all()
 
-class LoginForm(FlaskForm):
+class LoginForm(Form):
     """管理员登录表单"""
     account = StringField(
         label="账号",
@@ -45,7 +46,7 @@ class LoginForm(FlaskForm):
         if admin == 0:
             raise ValidationError("账号不存在！")
 
-class TagForm(FlaskForm):
+class TagForm(Form):
     name = StringField(
         label="名称",
         validators=[
@@ -68,7 +69,7 @@ class TagForm(FlaskForm):
 
 
 
-class MovieForm(FlaskForm):
+class MovieForm(Form):
     title = StringField(
         label="片名",
         validators=[
@@ -175,7 +176,7 @@ class MovieForm(FlaskForm):
         }
     )
 
-class PreviewForm(FlaskForm):
+class PreviewForm(Form):
     title = StringField(
         label="预告标题",
         validators=[

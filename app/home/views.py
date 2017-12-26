@@ -3,8 +3,6 @@ from . import home
 from flask import render_template, redirect, url_for
 
 
-
-
 @home.route("/login/")
 def login():
     return render_template("home/login.html")
@@ -54,13 +52,16 @@ def index():
 def animation():
     return render_template("home/animation.html")
 
+
 @home.route("/search/")
 def search():
     return render_template("home/search.html")
 
+
 @home.route("/play/")
 def play():
     return render_template("home/play.html")
+
 
 @home.errorhandler(404)
 def page_not_found():
